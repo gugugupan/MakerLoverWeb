@@ -1,113 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 	<head>
 		<meta charset="utf-8">
 		<title>3D Camera by Project MakerLover - 3D模型展示页 - 拍下你第一张3D相片</title>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				margin: 0px;
-				overflow: hidden;
-			}
-
-			#browser_text {
-				font-size: 12px;
-				display: none;
-			}
-
-			#browser_text a {
-				color: inherit;
-				text-decoration: none;
-			}
-
-			#button_area {
-				position: absolute;
-				top: 10px;
-				left: 10px;
-				width: 100%;
-				height: auto;
-				z-index: 3;
-			}
-
-			#button_area .btn {
-				margin-right: 10px;
-			}
-
-			#info_area {
-				position: absolute;
-				left: 0;
-				bottom: 0;
-				width: auto;
-				height: auto;
-				z-index: 10;
-			}
-
-			#info_area p {
-				color: white;
-				font-size: 16px;
-				line-height: 20px;
-				margin: 0;
-			}
-
-			#three_mtl_show_container {
-				background-color: black;
-				width: 100%;
-				height: 100%;
-				position: absolute;
-			}
-
-			#input_background {
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				z-index: 5;
-				top: 0;
-				left: 0;
-				background-color: #1abc9c;
-			}
-
-			#input_form {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				margin-top: -100px;
-				margin-left: -200px;
-				background-color: #ecf0f1;
-				width: auto;
-				height: auto;
-				padding: 20px 20px 20px;
-
-				position: absolute;
-				-webkit-border-radius: 8px;
-				-moz-border-radius: 8px;
-				border-radius: 8px;
-			}
-
-			#input_form input {
-				width: 250px;
-				height: 23px;
-				float: left;
-			}
-
-			#input_form p {
-				color: #7f8c8d;
-				font-size: 16px;
-				margin: 0 0 15px;
-			}
-
-			#input_form #query_button {
-				margin-left: 20px;
-				float: left;
-			}
-
-			#input_form #bottom_text {
-				margin: 5px 0 0;
-				font-size: 14px;
-			}
-
-		</style>
-		<link rel="stylesheet" type="text/css" href="index.css">
+		<!-- <link rel="stylesheet" type="text/css" href="index.css"> -->
+		<link rel="stylesheet" type="text/css" href="show.css">
 
 		<script src="lib/three.min.js"></script>
 		<script src="lib/OBJLoader.js"></script>
@@ -115,41 +13,30 @@
 		<script src="lib/OBJMTLLoader.js"></script>
 		<script src="lib/jquery-git1.js"></script>
 		<script src="threed_mtl_show.js"></script>
-	</head>
-
-	<body>
-		<div id="button_area">
-			<a id="return_button" href="index.html" class="btn">回到首页</a>
-			<a id="faq_button" href="faq.html" class="btn">常见问题</a>
-			<a id="download_button" href="" class="btn">模型下载</a>
-		</div>
-
-		<div id="input_background">
-			<div id="input_form">
-				<p>在这里输入拍照的时候获得到的照片ID.</p>
-				<p>点击查询, 马上呈现真实3D相片</p>
-				<input id="query_model_id" placeholder="请输入查询照片的ID">
-				<a id="query_button" href="javascript:query()" class="btn btn-primary">查询</a>
-				<div class="clearfix"> </div>
-				<p id="bottom_text"> </p>
-				<p id="browser_text" style="font-size: 12px; margin-bottom: 0;">
-					[小提醒] 系统监测到您可能在使用IE内核浏览器, </br>
-					继续使用该浏览器可能会造成模型无法正常显示的情况. </br>
-					或者下载最新浏览器: <a href="http://www.firefox.com.cn/" target="_blank">firefox</a> <a href="https://www.google.com/intl/en/chrome/browser/" target="_blank">chrome</a>
-				</p>
-			</div>
-		</div>
-
-		<div id="three_mtl_show_container">
-		</div>
-
-		<div id="info_area">
-		</div>
 
 		<script>
-			var default_id = request_params( "id" ) ;
-			if ( default_id ) 
-				go_query( default_id ) ;
+			$( document ) .ready( function() {
+
+				// IE监测 (눈_눈)
+				if ( navigator.userAgent.indexOf( "IE" ) >= 0 ) {
+					$( "#browser_text" ).fadeIn( 0 ) ;
+				}
+
+				// 显示默认模型，或者通过传入id进行显示
+				var default_id = request_params( "id" ) || "fengkan" ;
+				if ( default_id ) 
+					go_query( default_id ) ; 
+
+				// 在精选模型中加入内容 (๑•̀ㅂ•́)و✧
+				var modula_str = '<a class="hottest_block" href="javascript:go_query(\'###\)"><img src="photo/hottest/###.jpg"></a>'
+				// modula_str.replace( /\#\#\#/ , "asd" ).replace( /\#\#\#/ , "asd" ) ;
+				var hottest_ids = [ "8a5" , "8ac" , "bac" , "fc1" ] ;
+				for ( i in hottest_ids ) 
+				{
+					var html_str = modula_str.replace( /\#\#\#/ , hottest_ids[ i ] ).replace( /\#\#\#/ , hottest_ids[ i ] ) ;
+					$( "#hottest_area_container" ).prepend( html_str ) ;
+				}
+			} ) ;
 
 			function query()
 			{
@@ -165,13 +52,15 @@
 					$( "#bottom_text" ).text( "请输入一个正确的id欸(ò_ó)" ) ;
 				} else {
 					$( "#bottom_text" ).text( "读取中..." ) ;
-					// var data = {"id":"fengkan","status":"done"} ;
+					var data = {"id":"fengkan","status":"done"} ;
 					// var data = {"id":"not found","status":"not found"} ;
 					// var data = {"id":"feb","status":"failed","reason":"抱歉，由于拍摄时的失误，未能取得足够的照片生成您的3D模型。"};
-					$.getJSON( "/jobs/" + model_id + ".json", function( data ) {
+					// $.getJSON( "/jobs/" + model_id + ".json", function( data ) {
 						if ( data.status == "done" )
 						{
 							go_show_model( model_id ) ;
+							$( "#bottom_text" ).text( "" ) ;
+							$( "#title_area" ).text( model_id ) ;
 							$( "#download_button" ).attr( "href" , "/obj/" + model_id + "/" + model_id + ".zip" ) ;
 						} else if ( data.status == "failed" ) 
 						{
@@ -183,13 +72,13 @@
 							$( "#bottom_text" ).width( "300px" ) ;
 							$( "#bottom_text" ).css( "color", "red" )  ;
 						}
-					} ) ;
+					// } ) ;
 				}
 			}
 
 			function go_show_model( model_id )
 			{
-				$( "#input_background" ).fadeOut( 500 ) ;
+				// $( "#input_background" ).fadeOut( 500 ) ;
 				var obj_name = "/obj/" + model_id + "/" + model_id + ".obj" ,
 					mtl_name = "/obj/" + model_id + "/" + model_id + ".mtl" ;
 				setTimeout( function() { initialize_three_3d( obj_name , mtl_name ) ; } , 500 ) ;
@@ -209,12 +98,51 @@
 			        return returnValue;
 			    }
 			}
-
-			$(document).ready(function() {
-				if ( navigator.userAgent.indexOf( "IE" ) >= 0 ) {
-					$( "#browser_text" ).fadeIn( 0 ) ;
-				} 
-			} ) ;
 		</script>
+	</head>
+
+	<body>
+
+		<div id="input_background">
+			<div id="button_area">
+				<a id="return_button" href="index.html" class="btn">回到首页</a>
+				<a id="download_button" href="" class="btn">模型下载</a>
+				<a id="faq_button" href="faq.html" class="btn">常见问题</a>
+				<p style="font-size: 14px;">不知道怎么打开模型文件？想把头像打印出来？来看看常见问题吧！</p>
+				<div class="clearfix"> </div>
+			</div>
+
+			<div id="input_area">
+				<p class="title_text">模型查询</p>
+				<p>在这里输入拍照的时候获得到的照片ID.</p>
+				<p>点击查询, 马上呈现真实3D相片</p>
+				<form id="input_form">
+					<input id="query_model_id" type="text" placeholder="请输入查询照片的ID">
+					<a id="query_button" class="btn" href="javascript:query()">查询</a>
+					<div class="clearfix"> </div>
+				</form>
+				<p id="bottom_text"> </p>
+				<p id="browser_text" style="font-size: 12px; margin-bottom: 0; line-height: 14px;">
+					[小提醒] 系统监测到您可能在使用IE内核浏览器, </br>
+					继续使用该浏览器可能会造成模型无法正常显示的情况. </br>
+					或者下载最新浏览器: <a href="http://www.firefox.com.cn/" target="_blank">firefox</a> <a href="https://www.google.com/intl/en/chrome/browser/" target="_blank">chrome</a>
+				</p>
+			</div>
+
+			<div id="hottest_area">
+				<p class="title_text">精选模型</p>
+				<div id="hottest_area_container">
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+
+		<div id="three_mtl_show_container">
+			<div id="title_area">
+			</div>
+			<div id="info_area">
+			</div>
+		</div>
+		<div class="clearfix"> </div>
 	</body>
 </html>

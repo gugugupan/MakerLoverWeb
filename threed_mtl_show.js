@@ -3,7 +3,7 @@ var BASE_POINT_Y = 0 ;
 var BASE_POINT_Z = 3 ;
 
 var container, camera, scene, renderer, object;
-var radius , window_height_half = window.innerHeight / 2 , window_width_half = window.innerWidth / 2 ;
+var radius , window_height_half = window.innerHeight / 2 , window_width_half = window.innerWidth / 2 * 3 / 4 ;
 var mouse_x , mouse_y , zoom ;
 var mouse_x_record , mouse_y_record , camera_rotate_record ;
 var is_click = false ;
@@ -11,9 +11,13 @@ var is_click = false ;
 initialize_three_3d();
 
 function initialize_three_3d( obj_file , mtl_file ) {
+	// clear obj file
+	show_log( "Initialize Scene" ) ;
+	$( '#three_mtl_show_container' ).find( "canvas" ).remove() ;
+
 	// set camera
 	show_log( "Setting Camera..." ) ;
-	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight , 1, 1000 );
+	camera = new THREE.PerspectiveCamera( 45, window.innerWidth * 3 / 4 / window.innerHeight , 1, 1000 );
 	camera.position.x = 0;
 	camera.position.y = 0;
 	camera.position.z = 7;
@@ -62,7 +66,7 @@ function startAnimate()
 {
 	// New Renderer
 	renderer = new THREE.WebGLRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( window.innerWidth * 3 / 4 , window.innerHeight );
 	container = document.getElementById( 'three_mtl_show_container' );
 	container.appendChild( renderer.domElement );
 	//container.style.display = "block" ;
@@ -82,11 +86,11 @@ function startAnimate()
 
 function onWindowResize() 
 {
-	window_width_half = window.innerWidth / 2;
-	window_height_half = window.innerHeight / 2;
-	camera.aspect = window.innerWidth / window.innerHeight;
+	window_width_half = window.innerWidth / 2 * 3 / 4 ;
+	window_height_half = window.innerHeight / 2 ;
+	camera.aspect = window.innerWidth * 3 / 4  / window.innerHeight;
 	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( window.innerWidth * 3 / 4  , window.innerHeight );
 }
 
 function onContainerClick()
@@ -186,7 +190,7 @@ function render()
 			camera_z = camera.position.z - BASE_POINT_Z ;
 
 		// Adjust Camera's position on the circle
-		var angle = 12.0 * ( mouse_x - mouse_x_record ) / window.innerWidth ;
+		var angle = 12.0 * ( mouse_x - mouse_x_record ) / window.innerWidth * 3 / 4 ;
 		mouse_x_record = mouse_x ;
 		camera_rotate( angle ) ;
 		camera_z = zoom * Math.cos( camera_rotate_record ) ; // zoom is radius
