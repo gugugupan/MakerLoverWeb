@@ -52,10 +52,10 @@
 					$( "#bottom_text" ).text( "请输入一个正确的id欸(ò_ó)" ) ;
 				} else {
 					$( "#bottom_text" ).text( "读取中..." ) ;
-					var data = {"id":"fengkan","status":"done"} ;
+					// var data = {"id":"fengkan","status":"done"} ;
 					// var data = {"id":"not found","status":"not found"} ;
 					// var data = {"id":"feb","status":"failed","reason":"抱歉，由于拍摄时的失误，未能取得足够的照片生成您的3D模型。"};
-					// $.getJSON( "/jobs/" + model_id + ".json", function( data ) {
+					$.getJSON( "/jobs/" + model_id + ".json", function( data ) {
 						if ( data.status == "done" )
 						{
 							go_show_model( model_id ) ;
@@ -72,7 +72,7 @@
 							$( "#bottom_text" ).width( "300px" ) ;
 							$( "#bottom_text" ).css( "color", "red" )  ;
 						}
-					// } ) ;
+					} ) ;
 				}
 			}
 
