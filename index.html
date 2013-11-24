@@ -1,0 +1,194 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>3D Camera by Project MakerLover - 拍下你第一张3D相片</title>
+		<link rel="stylesheet" type="text/css" href="index.css">
+		<script type="text/javascript" src="lib/jquery-git1.js"></script>
+		<script type="text/javascript" src="lib/jquery.smooth-scroll.min.js"></script>
+	</head>
+	<body>
+		<div id="scroll_part">
+			<div class="one_screen" style="width: 50%;"> </div>
+			<div id="what_is_us" class="one_screen">
+				<p class="big_center_font">什么是 3D Camera ?</p>
+			</div>
+			<div class="one_screen"> </div>
+			<div id="working_principle" class="one_screen">
+				<p class="big_center_font">我们是如何做到的 ?</p>
+			</div>
+			<div class="one_screen"> </div>
+			<div id="activity_map">
+				<p class="title_font">来上海创客嘉年华, 便有机会亲身体验 3D Camera !</p>
+				<div id="activity_map_main">
+					<div id="map_img">
+						<img src="http://api.map.baidu.com/staticimage?center=121.520238,31.311461&width=390&height=290&zoom=17&&markers=121.520238,31.311461&markerStyles=l">
+					</div>
+					<div id="address_des">
+						<p class="address_title"><a href="http://shanghaimakercarnival.com/">上海创客嘉年华(已结束)</a></p>
+						<p>时间: 2013年10月19-20日</p>
+						<p>地点: 上海杨浦区290号创智天地广场</p>
+						<p>&nbsp;</p>
+						<p>We're waiting for your arrival</p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div id="footer">
+					Copyright © 2013 3D Camera by Project MakerLover </br>
+					友情连接 : <a href="http://vida.fm/">Vida微图记</a> | <a href="http://vimi.in/">微米印</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Background Part -->
+		<div id="index_cover" class="back_part">
+			<div id="index_intro_text">
+				<p id="font1">3D Camera</p>
+				<p id="font2">BY</p>
+				<p id="font3">Project MakerLover</p>
+			</div>
+			<div id="btn_area">
+				<a id="faq_btn" class="btn" href="faq.html">常见问题</a>				
+				<a id="where_are_we" class="btn" href="javascript:show_about_us()">活动详情</a>
+				<a id="show_model" class="btn" href="show.html">查看相片</a>
+			</div>
+		</div>
+
+		<div id="intro_part" class="back_part">
+			<div class="intro_part_container" style="top: 33%;">
+				<div class="image" style="float: left; background: url( image/iphone.png ) no-repeat center center;">
+					<p> * 9 </p>
+				</div>
+				<div class="content" style="float: right;">
+					<p>由 9 台 iPod 构成</p>
+					<p>从左中右三个方向, 多个角度同时拍摄</p>
+					<p>经过云端处理, 便能得到 3D相片</p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="intro_part_container" style="top: 66%;">
+				<div class="content" style="float: right;">
+					<p>省去 3D 扫描仪漫长的扫瞄过程</p>
+					<p>就像拍生活照一样简单</p>
+					<p>坐下, 微笑, 立刻获得专属你的 3D相片</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="principle_part" class="back_part">
+			<div id="principle_part_container">
+				<div class="step">
+					<img src="image/principle1.png">
+					<p>从照片中提取特征值, 重建拍摄场景</p>
+				</div>
+				<div class="step">
+					<img src="image/principle2.png">
+					<p>根据拍摄场景, 构建物体曲面</p>
+				</div>
+				<div class="step">
+					<img src="image/principle3.png">
+					<p>在曲面上进行高清渲染</p>
+				</div>
+				<p class="pointer" style="left:368px;">&gt;</p>
+				<p class="pointer" style="left:710px;">&gt;</p>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+
+		<div id="about_activity_part">
+			<div id="about_activity_part_container">
+				<p class="title">关于我们</p>
+				<p class="content">
+					<img src="photo/us.JPG"> </br>
+					我们是一个来自上海的小小的团队. </br>
+					@哦买膏 @Yukis打小怪兽 @冯侃
+				</p>
+				<hr style="color: #e67e22; size:5px;"/>
+
+				<p class="title">现场活动照片</p>
+				<p class="content">
+					<img src="photo/p0.JPG"> </br>
+					<img src="photo/p1.JPG"> </br>
+					<img src="photo/p2.JPG"> </br>
+					<img src="photo/p3.JPG"> </br>
+					<img src="photo/p4.JPG"> </br>
+					<span style="line-height: 50px;">没有玩够? 没关系! 敬请期待下次更精彩的活动!</span>
+				</p>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			// Smooth Scroll
+			$( "#where_are_we" ).smoothScroll( 2000 );
+
+			// when resize
+			var onWindowResizeTimeout = null ;
+			function onWindowResize(){
+				clearTimeout(onWindowResizeTimeout) ;
+				onWindowResizeTimeout = null;
+
+				$( ".one_screen" ).height( window.innerHeight ) ;
+			}
+			$( window ) .resize( function() {
+				clearTimeout(onWindowResizeTimeout) ;
+				onWindowResizeTimeout = setTimeout( onWindowResize , 200 ) ;
+			} );
+			onWindowResize() ;
+
+			// when scroll
+			var to_top = $( window ).scrollTop() , now_part = -1 ;
+
+			$( window ).scroll( function() {
+				to_top = $( window ).scrollTop() ;
+			} ) ;
+
+			function catchWindowScroll() 
+			{
+				if ( to_top <= window.innerHeight && now_part != 0 )
+				{
+					$( ".back_part" ).hide( 0 ) ;
+					$( "#index_cover" ).show( 0 ) ;
+					now_part = 0 ;
+				}
+				if ( to_top > window.innerHeight && to_top <= window.innerHeight * 3 && now_part != 1 )
+				{
+					$( ".back_part" ).hide( 0 ) ;
+					$( "#intro_part" ).show( 0 ) ;
+					now_part = 1 ;					
+				}
+				if ( to_top > window.innerHeight * 3 && now_part != 2 )
+				{
+					$( ".back_part" ).hide( 0 ) ;
+					$( "#principle_part" ).show( 0 ) ;
+					now_part = 2 ;					
+				}
+				requestAnimationFrame( catchWindowScroll ) ;
+			}
+			catchWindowScroll() ;
+
+			// requestAnimationFrame
+			if ( !requestAnimationFrame )
+			{
+				function requestAnimationFrame( handle )
+				{
+					setTimeout( handle , 50 ) ;
+				}
+			}
+
+			//
+			var show_log = false ;
+			function show_about_us()
+			{
+				if ( show_log ) return ;
+				show_log = true ;
+
+				$( "body" ).css( "overflow" , "hidden" ) ;
+				$( "#about_activity_part" ).fadeIn( 800 ) ;
+			}
+			$( "#about_activity_part" ).click( function() {
+				show_log = false ;
+				$( "body" ).css( "overflow" , "scroll" ) ;
+				$( "#about_activity_part" ).fadeOut( 800 ) ;
+			})
+		</script>
+	</body>
+</html>
