@@ -21,20 +21,22 @@
 				if ( navigator.userAgent.indexOf( "IE" ) >= 0 ) {
 					$( "#browser_text" ).fadeIn( 0 ) ;
 				}
+				var hottest_ids = [ "8a5" , "8ac" , "8cc" , "806", "829", "897", "a1e", "a45", "ad9", "eb0", "b40", "bac", "bbf", "e9c", "f71", "fc1" ] ;
 
 				// 显示默认模型，或者通过传入id进行显示
-				var default_id = request_params( "id" ) || "fengkan" ;
+				var default_id = request_params( "id" ) || hottest_ids[Math.floor(Math.random()*hottest_ids.length)] ;
 				if ( default_id ) 
 					go_query( default_id ) ; 
 
 				// 在精选模型中加入内容 (๑•̀ㅂ•́)و✧
 				var modula_str = '<a class="hottest_block" href="javascript:go_query(\'###\)"><img src="photo/hottest/###.jpg"></a>'
 				// modula_str.replace( /\#\#\#/ , "asd" ).replace( /\#\#\#/ , "asd" ) ;
-				var hottest_ids = [ "8a5" , "8ac" , "bac" , "fc1" ] ;
+				
+				var modula_str = '<div class="thumbnailimage"><div class="thumb_container"><div class="large_thumb"><a href="javascript:go_query(\'###\')" class="hottest_block"><img src="photo/hottest/###.png" width="54px" height="54px"></a></div></div></div>';
 				for ( i in hottest_ids ) 
 				{
 					var html_str = modula_str.replace( /\#\#\#/ , hottest_ids[ i ] ).replace( /\#\#\#/ , hottest_ids[ i ] ) ;
-					$( "#hottest_area_container" ).prepend( html_str ) ;
+					$( ".thumbnails" ).prepend( html_str ) ;
 				}
 			} ) ;
 
@@ -46,6 +48,7 @@
 
 			function go_query( model_id )
 			{
+				$( "#info_area" ).text( "" ) ;
 				if ( !model_id ) model_id = "" ;
 				if ( model_id.length == 0 )
 				{
@@ -60,7 +63,6 @@
 						{
 							go_show_model( model_id ) ;
 							$( "#bottom_text" ).text( "" ) ;
-							$( "#title_area" ).text( model_id ) ;
 							$( "#download_button" ).attr( "href" , "/obj/" + model_id + "/" + model_id + ".zip" ) ;
 						} else if ( data.status == "failed" ) 
 						{
@@ -104,12 +106,13 @@
 	<body>
 
 		<div id="input_background">
-			<div id="button_area">
-				<a id="return_button" href="index.html" class="btn">回到首页</a>
-				<a id="download_button" href="" class="btn">模型下载</a>
-				<a id="faq_button" href="faq.html" class="btn">常见问题</a>
-				<p style="font-size: 14px;">不知道怎么打开模型文件？想把头像打印出来？来看看常见问题吧！</p>
-				<div class="clearfix"> </div>
+
+			<div id="hottest_area">
+				<p class="title_text">大家的模型</p>
+				<div class="thumbnails"></div>
+				<div id="hottest_area_container">
+					<div class="clearfix"> </div>
+				</div>
 			</div>
 
 			<div id="input_area">
@@ -129,16 +132,14 @@
 				</p>
 			</div>
 
-			<div id="hottest_area">
-				<p class="title_text">精选模型</p>
-				<div id="hottest_area_container">
-					<div class="clearfix"> </div>
-				</div>
-			</div>
 		</div>
 
 		<div id="three_mtl_show_container">
-			<div id="title_area">
+			<div id="button_area">
+				<a id="return_button" href="index.html" class="btn">回到首页</a>
+				<a id="download_button" href="" class="btn">模型下载</a>
+				<a id="faq_button" href="faq.html" class="btn">不知道怎么打开模型文件？想把头像打印出来？来看看常见问题吧！</a>
+				<div class="clearfix"> </div>
 			</div>
 			<div id="info_area">
 			</div>

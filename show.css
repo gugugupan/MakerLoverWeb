@@ -1,5 +1,17 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("font/Helvetica Neue Light.otf");
+  font-weight: 600; }
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("font/Helvetica Neue Condensed Bold.ttf");
+  font-weight: 800; }
+
+
 body {
-  font-family: Monospace;
+  font-family: "Helvetica Neue", "Delicious", "STHeiTi", "Î¢ÈíÑÅºÚ", "ºÚÌå";
   margin: 0px;
   color: #333;
   width: 100%;
@@ -49,7 +61,7 @@ body {
   left: 0;
   background-color: #1abc9c;
   float: left;
-  overflow: scroll; }
+}
   #input_background p {
     color: white;
     font-size: 16px;
@@ -73,7 +85,7 @@ body {
     width: 100%;
     height: auto;
     padding: 10px 0;
-    border-bottom: 6px dashed #34495e; }
+    border-top: 6px dashed #34495e; }
     #input_background #input_area #input_form {
       width: auto;
       padding: 10px 10px 0; }
@@ -138,8 +150,7 @@ body {
   clear: both; }
 
 .btn {
-  width: 100%;
-  padding: 12px 0 13px 0;
+  padding: 12px 20px 13px;
   border-radius: 6px;
   text-align: center;
   background-color: #34495e;
@@ -159,7 +170,7 @@ body {
   -webkit-box-shadow: 1px 1px 1px #000000;
   -moz-box-shadow: 1px 1px 1px #000000;
   box-shadow: 1px 1px 1px #000000;
-  margin-top: 10px; }
+  margin: 10px; }
   .btn:hover, .btn:focus {
     background-color: #4e6d8d;
     color: white;
@@ -176,3 +187,7 @@ body {
     -moz-box-shadow: none;
     box-shadow: none;
     cursor: pointer; }
+
+.thumbnailimage { float:left; padding:3px;}
+.large_thumb	{float:left; position: relative; width:64px; height:64px; padding:0px 10px 0px 0;}
+.thumb_container { width:64px; height:64px;}
