@@ -1,15 +1,4 @@
 @charset "UTF-8";
-@font-face {
-  font-family: "Helvetica Neue";
-  src: url("font/Helvetica Neue Light.otf");
-  font-weight: 600; }
-
-@font-face {
-  font-family: "Helvetica Neue";
-  src: url("font/Helvetica Neue Condensed Bold.ttf");
-  font-weight: 800; }
-
-
 body {
   font-family: "Helvetica Neue", "Delicious", "STHeiTi", "微软雅黑", "黑体";
   margin: 0px;
@@ -60,8 +49,7 @@ body {
   top: 0;
   left: 0;
   background-color: #1abc9c;
-  float: left;
-}
+  float: left; }
   #input_background p {
     color: white;
     font-size: 16px;
@@ -85,7 +73,8 @@ body {
     width: 100%;
     height: auto;
     padding: 10px 0;
-    border-top: 6px dashed #34495e; }
+    border-top: 6px dashed #34495e;
+    border-bottom: 6px dashed #34495e; }
     #input_background #input_area #input_form {
       width: auto;
       padding: 10px 10px 0; }
@@ -119,7 +108,8 @@ body {
           -o-transition: 0.25s;
           transition: 0.25s; }
       #input_background #input_area #input_form #query_button {
-        float: left; }
+        margin: 10px 0 0 0;
+        width: auto; }
     #input_background #input_area #bottom_text {
       margin: 5px 0 0;
       font-size: 14px; }
@@ -188,6 +178,17 @@ body {
     box-shadow: none;
     cursor: pointer; }
 
-.thumbnailimage { float:left; padding:3px;}
-.large_thumb	{float:left; position: relative; width:64px; height:64px; padding:0px 10px 0px 0;}
-.thumb_container { width:64px; height:64px;}
+.thumbnailimage {
+  float: left;
+  padding: 3px; }
+
+.large_thumb {
+  float: left;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  padding: 0px 10px 0px 0; }
+
+.thumb_container {
+  width: 64px;
+  height: 64px; }
